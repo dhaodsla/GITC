@@ -163,7 +163,7 @@ export default function App() {
               </button>
               <div className="w-full overflow-hidden rounded-2xl shadow-2xl bg-white relative">
                 <img 
-                  src="./promo.jpg" 
+                  src={`${import.meta.env.BASE_URL}promo.jpg`} 
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     // Provide a nice fallback if user hasn't uploaded 'promo.jpg' yet, or show the alt text styled.
@@ -228,7 +228,7 @@ function HomeSection({ scrollToSection }: { scrollToSection: (tab: string) => vo
           initial={{ scale: 1.05 }}
           animate={{ scale: 1 }}
           transition={{ duration: 2, ease: "easeOut" }}
-          src="./gitc-campus.jpg" 
+          src={`${import.meta.env.BASE_URL}gitc-campus.jpg`} 
           onError={(e) => {
             // Fallback image if user hasn't uploaded it yet
             (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop";
