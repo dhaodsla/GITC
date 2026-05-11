@@ -23,8 +23,6 @@ export default function GallerySection() {
   const [activeCategory, setActiveCategory] = useState<CategoryType>('activities');
   const [photos, setPhotos] = useState<Record<CategoryType, string[]>>(DEFAULT_PHOTOS);
   const [isFullscreen, setIsFullscreen] = useState<string | null>(null);
-  const [adminPrompt, setAdminPrompt] = useState<{ isOpen: boolean; action: 'upload' | { deleteIdx: number } | null; error: boolean }>({ isOpen: false, action: null, error: false });
-  const [password, setPassword] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -37,7 +35,7 @@ export default function GallerySection() {
   }, []);
 
   const handleUploadClick = () => {
-    setAdminPrompt({ isOpen: true, action: 'upload', error: false });
+    fileInputRef.current?.click();
   };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,7 +64,10 @@ export default function GallerySection() {
 
   const handleDeleteClick = (indexToDelete: number, e: React.MouseEvent) => {
     e.stopPropagation();
-    setAdminPrompt({ isOpen: true, action: { deleteIdx: indexToDelete }, error: false });
+    const updatedList = photos[activeCategory].filter((_, i) => i !== indexToDelete);
+    const updatedPhotos = { ...photos, [activeCategory]: updatedList };
+    setPhotos(updatedPhotos);
+    set('gitc_gallery_photos', updatedPhotos);
   };
 
   return (
@@ -223,70 +224,6 @@ export default function GallerySection() {
               className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl" 
             />
           </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Admin Password Modal */}
-      <AnimatePresence>
-        {adminPrompt.isOpen && (
-          <div className="fixed inset-0 z-[200] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
-            <motion.div 
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white rounded-2xl p-6 w-full max-w-sm shadow-2xl relative"
-            >
-              <button 
-                onClick={() => {
-                  setAdminPrompt({ isOpen: false, action: null, error: false });
-                  setPassword('');
-                }}
-                className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-900"
-              >
-                <X className="w-5 h-5" />
-              </button>
-              <h3 className="text-xl font-bold text-neutral-900 mb-2">관리자 권한 필요</h3>
-              <p className="text-sm text-neutral-600 mb-6">사진을 관리하려면 비밀번호를 입력해주세요.</p>
-              <form onSubmit={(e) => {
-                e.preventDefault();
-                if (password === '1234') { // Default password
-                  if (adminPrompt.action === 'upload') {
-                    fileInputRef.current?.click();
-                  } else if (adminPrompt.action && typeof adminPrompt.action === 'object' && 'deleteIdx' in adminPrompt.action) {
-                    const idx = adminPrompt.action.deleteIdx;
-                    const updatedList = photos[activeCategory].filter((_, i) => i !== idx);
-                    const updatedPhotos = { ...photos, [activeCategory]: updatedList };
-                    setPhotos(updatedPhotos);
-                    set('gitc_gallery_photos', updatedPhotos);
-                  }
-                  setAdminPrompt({ isOpen: false, action: null, error: false });
-                  setPassword('');
-                } else {
-                  setAdminPrompt(prev => ({ ...prev, error: true }));
-                }
-              }}>
-                <input 
-                  type="password" 
-                  autoFocus
-                  className={`w-full px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-600 mb-2 ${adminPrompt.error ? 'border-red-500 bg-red-50' : 'border-neutral-200'}`}
-                  placeholder="비밀번호"
-                  value={password}
-                  onChange={e => {
-                    setPassword(e.target.value);
-                    setAdminPrompt(prev => ({ ...prev, error: false }));
-                  }}
-                />
-                {adminPrompt.error ? (
-                  <p className="text-red-500 text-sm mb-4">비밀번호가 일치하지 않습니다.</p>
-                ) : (
-                  <div className="mb-4 text-sm text-neutral-400">초기 비밀번호: 1234</div>
-                )}
-                <button type="submit" className="w-full bg-blue-600 text-white rounded-xl py-3 font-bold hover:bg-blue-700 transition-colors shadow-md">
-                  확인
-                </button>
-              </form>
-            </motion.div>
-          </div>
         )}
       </AnimatePresence>
 
