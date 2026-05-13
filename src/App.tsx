@@ -70,6 +70,28 @@ export default function App() {
     };
   }, [showSplash]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const sectionIds = ["home", ...tabs.map((t) => t.id)];
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sectionIds[i]);
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= 120) {
+            setActiveTab(sectionIds[i]);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Call once to set initial state
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const scrollToSection = (id: string) => {
     setActiveTab(id);
     const element = document.getElementById(id);
@@ -480,16 +502,24 @@ function HomeSection({
             <span className="italic text-white">영어캠프</span>
           </motion.h1>
 
-          <motion.p
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="text-lg md:text-xl text-neutral-300 max-w-xl  leading-relaxed border-l border-[#c5a880]/30 pl-8 mt-2 mix-blend-screen"
+            className="mt-2"
           >
-            최고의 강사진, 철저한 부설 대학 내 안전 관리, 생생한 현지 문화 체험.
-            <br />
-            GITC에서 수준이 다른 글로벌 리더의 꿈을 키우세요.
-          </motion.p>
+            <p className="text-lg md:text-xl text-neutral-300 max-w-xl leading-relaxed border-l border-[#c5a880]/30 pl-8 mb-6 mix-blend-screen">
+              최고의 강사진, 철저한 부설 대학 내 안전 관리, 생생한 현지 문화 체험.
+              <br />
+              아이의 영어 자신감, GITC가 키웁니다!
+            </p>
+            <div className="flex flex-wrap gap-4 pl-8 border-l border-transparent">
+              <span className="bg-[#c5a880]/20 text-[#c5a880] px-4 py-1.5 rounded-full text-sm backdrop-blur-sm border border-[#c5a880]/30 font-medium">Speaking 실력 향상</span>
+              <span className="bg-[#c5a880]/20 text-[#c5a880] px-4 py-1.5 rounded-full text-sm backdrop-blur-sm border border-[#c5a880]/30 font-medium">실전 영어 활용 능력 강화</span>
+              <span className="bg-[#c5a880]/20 text-[#c5a880] px-4 py-1.5 rounded-full text-sm backdrop-blur-sm border border-[#c5a880]/30 font-medium">말하기 자신감·동기 UP</span>
+              <span className="bg-[#c5a880]/20 text-[#c5a880] px-4 py-1.5 rounded-full text-sm backdrop-blur-sm border border-[#c5a880]/30 font-medium">글로벌 문화 경험</span>
+            </div>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -748,49 +778,220 @@ function UniversitySection() {
         </div>
 
         <div className="w-full xl:w-1/2 md:p-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
             <div>
-              <h4 className="text-lg  font-bold text-neutral-900 mb-3 tracking-wide">
-                01. 완벽한 보안 및 치안
+              <h4 className="text-base md:text-lg font-bold text-neutral-900 mb-3 tracking-wide">
+                01. 정식 학사학위 4년제 대학
               </h4>
-              <p className="text-neutral-600 leading-relaxed  text-sm">
-                일반 어학교가 아닌 정규 대학 컴파운드 내에 캠프 시설이 위치하여,
-                24시간 철저한 청원경찰의 출입 통제와 사각지대 없는 CCTV
-                시스템으로 최적의 환경을 제공합니다.
-              </p>
+              <ul className="text-neutral-600 leading-relaxed text-sm space-y-1">
+                <li className="flex items-start gap-2"><span className="text-[#c5a880]">•</span>관광경영학과 운영</li>
+                <li className="flex items-start gap-2"><span className="text-[#c5a880]">•</span>CHED 인허가 전문 대학</li>
+              </ul>
             </div>
 
             <div>
-              <h4 className="text-lg  font-bold text-neutral-900 mb-3 tracking-wide">
-                02. 검증된 우수 강사진
+              <h4 className="text-base md:text-lg font-bold text-neutral-900 mb-3 tracking-wide">
+                02. 언어교육원 (ESL 전문 기관)
               </h4>
-              <p className="text-neutral-600 leading-relaxed  text-sm">
-                GITC 대학 소속의 우수한 ESL 강사진들이 수업을 진행합니다.
-                까다로운 채용 과정과 정기적인 강사 트레이닝을 통해 우수한 교육
-                퀄리티를 유지합니다.
-              </p>
+              <ul className="text-neutral-600 leading-relaxed text-sm space-y-1">
+                <li className="flex items-start gap-2"><span className="text-[#c5a880]">•</span>공무원 연수</li>
+                <li className="flex items-start gap-2"><span className="text-[#c5a880]">•</span>Junior ESL</li>
+                <li className="flex items-start gap-2"><span className="text-[#c5a880]">•</span>TOEIC, IELTS 프로그램 운영</li>
+              </ul>
             </div>
 
             <div>
-              <h4 className="text-lg  font-bold text-neutral-900 mb-3 tracking-wide">
-                03. 원스톱 캠퍼스 라이프
+              <h4 className="text-base md:text-lg font-bold text-neutral-900 mb-3 tracking-wide">
+                03. Multi Campus
               </h4>
-              <p className="text-neutral-600 leading-relaxed  text-sm">
-                강의실, 기숙사, 식당, 체육시설이 모두 캠퍼스 내에 위치해 있어
-                외부로 이동할 필요가 없습니다. 불필요한 동선을 최소화하고 학습에
-                몰입합니다.
-              </p>
+              <ul className="text-neutral-600 leading-relaxed text-sm space-y-1">
+                <li className="flex items-start gap-2"><span className="text-[#c5a880]">•</span>ILOILO & CEBU</li>
+              </ul>
             </div>
 
             <div>
-              <h4 className="text-lg  font-bold text-neutral-900 mb-3 tracking-wide">
-                04. 선진화된 커리큘럼
+              <h4 className="text-base md:text-lg font-bold text-neutral-900 mb-3 tracking-wide">
+                04. SINCE 2003
               </h4>
-              <p className="text-neutral-600 leading-relaxed  text-sm">
-                다년간 축적된 노하우를 바탕으로, 한국 학생들에게 가장 취약한
-                '스피킹' 능력을 단기간에 끌어올릴 수 있는 맞춤형 프로그램을
-                제공합니다.
-              </p>
+              <ul className="text-neutral-600 leading-relaxed text-sm space-y-1">
+                <li className="flex items-start gap-2"><span className="text-[#c5a880]">•</span>2003년 C&C Language Center 설립</li>
+                <li className="flex items-start gap-2"><span className="text-[#c5a880]">•</span>2019년 GITC 대학 승격</li>
+                <li className="flex items-start gap-2"><span className="text-[#c5a880]">•</span>23년 이상의 안정된 운영</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-base md:text-lg font-bold text-neutral-900 mb-3 tracking-wide">
+                05. IELTS Official Test Center
+              </h4>
+              <ul className="text-neutral-600 leading-relaxed text-sm space-y-1">
+                <li className="flex items-start gap-2"><span className="text-[#c5a880]">•</span>IDP 공식 인증 센터</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-base md:text-lg font-bold text-neutral-900 mb-3 tracking-wide">
+                06. 파트너십 & 협력 기관
+              </h4>
+              <ul className="text-neutral-600 leading-relaxed text-sm space-y-1">
+                <li className="flex items-start gap-2"><span className="text-[#c5a880]">•</span>국내외 50개 이상의 대학 및 기관과 파트너십</li>
+                <li className="flex items-start gap-2"><span className="text-[#c5a880]">•</span>다양한 전문기관·장학재단 협력</li>
+                <li className="flex items-start gap-2"><span className="text-[#c5a880]">•</span>여러 교육기관이 인정한 안정적 프로그램</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto mt-8">
+        {/* 안심 올케어 시스템 */}
+        <div className="bg-[#0a0a0a] text-white p-8 md:p-12 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-48 h-48 bg-[#c5a880] opacity-10 rounded-full filter blur-[50px] transform translate-x-1/3 -translate-y-1/3" />
+          <div className="relative z-10">
+            <span className="text-[#c5a880] text-sm tracking-widest font-semibold uppercase mb-3 block">Total Care System</span>
+            <h3 className="text-3xl mb-8 leading-tight">
+              안전 관리, 확실하게 준비했습니다<br />안심 올케어 시스템
+            </h3>
+            
+            <div className="space-y-6 mb-8">
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center gap-4 bg-white/5 p-4 border border-white/10">
+                  <span className="text-[#c5a880] font-bold">1차 케어</span>
+                  <span className="text-neutral-300 text-sm">강사 1명 + 학생 2~3명 (Room Stay)</span>
+                </div>
+                <div className="flex items-center gap-4 bg-white/5 p-4 border border-white/10 ml-4">
+                  <span className="text-[#c5a880] font-bold">2차 케어</span>
+                  <span className="text-neutral-300 text-sm">Team Manager - Korean</span>
+                </div>
+                <div className="flex items-center gap-4 bg-white/5 p-4 border border-white/10 ml-8">
+                  <span className="text-[#c5a880] font-bold">3차 케어</span>
+                  <span className="text-neutral-300 text-sm">총괄 및 총장</span>
+                </div>
+              </div>
+            </div>
+
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-neutral-400">
+              <li className="flex items-start gap-2">
+                <span className="text-[#c5a880] mt-1">✓</span>
+                학생 2~3명 + 튜터 선생님 1명 Room Stay
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-[#c5a880] mt-1">✓</span>
+                24시간 상시 케어 및 관리
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-[#c5a880] mt-1">✓</span>
+                영어 사용 환경 유지
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-[#c5a880] mt-1">✓</span>
+                이상 징후 즉각 대응
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-[#c5a880] mt-1">✓</span>
+                응급 상황 즉시 조치 (한인 병원 연계)
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-[#c5a880] mt-1">✓</span>
+                출입 통제 및 안전 시스템 정비
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* 프리미엄 기숙사 */}
+        <div className="bg-[#f5f2ed] border border-[#e5e1db] p-8 md:p-12 flex flex-col justify-center">
+          <span className="text-[#96754a] text-sm tracking-widest font-semibold uppercase mb-3 block">Accommodation</span>
+          <h3 className="text-3xl text-neutral-900 mb-8 leading-tight">
+            아이의 하루를 지켜주는<br />프리미엄 기숙사 지원
+          </h3>
+          
+          <div className="space-y-8">
+            <div className="bg-white p-6 shadow-sm border border-neutral-100 flex items-start gap-4">
+              <div className="w-12 h-12 bg-[#f5f2ed] flex items-center justify-center shrink-0">
+                <span className="text-[#96754a] font-serif italic text-xl">01</span>
+              </div>
+              <div>
+                <h4 className="font-bold text-neutral-900 mb-2">프리미엄 외부 레지던스</h4>
+                <p className="text-neutral-600 text-sm leading-relaxed">
+                  번화가에 있어 이용이 편리한 맹그로브 레지던스. 더욱 쾌적하고 편리한 생활 환경을 제공합니다.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white p-6 shadow-sm border border-neutral-100 flex items-start gap-4">
+              <div className="w-12 h-12 bg-[#f5f2ed] flex items-center justify-center shrink-0">
+                <span className="text-[#96754a] font-serif italic text-xl">02</span>
+              </div>
+              <div>
+                <h4 className="font-bold text-neutral-900 mb-2">GITC 교내 전용 기숙사</h4>
+                <p className="text-neutral-600 text-sm leading-relaxed">
+                  GITC 세부 캠퍼 내부에 위치한 1인 캡슐 타입의 공용 기숙사. 동선 낭비 없이 안전하고 학습에 집중할 수 있는 환경입니다.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto mt-8">
+        {/* 캠프 지원 구성 */}
+        <div className="bg-white border border-neutral-200 p-8 md:p-12 relative overflow-hidden shadow-[0_4px_30px_rgba(0,0,0,0.02)]">
+          <div className="relative z-10">
+            <span className="text-[#c5a880] text-sm tracking-widest font-semibold uppercase mb-3 block">Inclusions</span>
+            <h3 className="text-3xl mb-4 text-neutral-900 leading-tight font-serif">
+              주니어 캠프 지원 구성
+            </h3>
+            <p className="text-neutral-500 mb-8 border-b border-neutral-100 pb-6">체계적으로 케어합니다.</p>
+            
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-5 gap-x-4 text-sm text-neutral-700 font-medium">
+              <li className="flex items-center gap-3"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>숙식</li>
+              <li className="flex items-center gap-3"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>수업 및 교재</li>
+              <li className="flex items-center gap-3"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>액티비티 (평일+주말)</li>
+              <li className="flex items-center gap-3"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>여행자 보험</li>
+              <li className="flex items-center gap-3"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>SSP 발급비</li>
+              <li className="flex items-center gap-3"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>공증비</li>
+              <li className="flex items-center gap-3"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>입국세</li>
+              <li className="flex items-center gap-3"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>단체 티</li>
+              <li className="flex items-center gap-3"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>세탁 및 룸 클리닝 서비스</li>
+              <li className="flex items-center gap-3"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>매일 사진·영상 업로드</li>
+              <li className="flex items-center gap-3"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>한국인 매니저 24시간 케어</li>
+              <li className="flex items-center gap-3 text-[#c5a880]"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>무료 화상 영어 제공</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* 화상 영어 */}
+        <div className="bg-[#0a0a0a] text-white p-8 md:p-12 relative overflow-hidden">
+          <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-[#c5a880] opacity-10 rounded-full filter blur-[60px]" />
+          <div className="relative z-10 flex flex-col h-full justify-center">
+            <span className="text-[#c5a880] text-sm tracking-widest font-semibold uppercase mb-3 block">Online English</span>
+            <h3 className="text-3xl mb-4 leading-tight font-serif">
+              무료 화상 영어 제공
+            </h3>
+            <p className="text-neutral-400 mb-8 max-w-sm">
+              화상 영어를 추가 비용 없이 이용할 수 있어요!
+            </p>
+            
+            <div className="space-y-4">
+              <div className="bg-white/5 p-5 border border-white/10">
+                <p className="text-white font-medium flex items-center gap-4 text-sm md:text-base">
+                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#c5a880] text-[#0a0a0a] text-xs font-bold shrink-0">1</span>
+                  연수 기간만큼 주 2회 / 25분 수업 무료 제공
+                </p>
+              </div>
+              <div className="bg-white/5 p-5 border border-white/10">
+                <p className="text-white font-medium flex items-center gap-4 text-sm md:text-base">
+                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#c5a880] text-[#0a0a0a] text-xs font-bold shrink-0">2</span>
+                  귀국 후 학습 루틴 자연스럽게 유지
+                </p>
+              </div>
+              <div className="bg-white/5 p-5 border border-white/10">
+                <p className="text-white font-medium flex items-center gap-4 text-sm md:text-base">
+                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#c5a880] text-[#0a0a0a] text-xs font-bold shrink-0">3</span>
+                  1:1 온라인 수업으로 회화 능력 지속 향상
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -1243,7 +1444,10 @@ function InquirySection() {
           href="#"
           onClick={(e) => {
             e.preventDefault();
-            scrollToSection("register");
+            const elm = document.getElementById("inquiry");
+            if (elm) {
+              elm.scrollIntoView({ behavior: "smooth" });
+            }
           }}
           className="group relative flex items-center justify-center w-14 h-14 bg-[#c5a880] text-[#0a0a0a] rounded-full shadow-2xl hover:scale-105 transition-all"
         >
