@@ -85,7 +85,7 @@ export default function FieldTripSection() {
             className={`p-10 md:p-14 ${diff.isGITC ? "bg-[#0a0a0a] text-white relative" : "bg-white"}`}
           >
             {diff.isGITC && (
-              <div className="absolute top-0 right-10 -translate-y-1/2 bg-[#c5a880] text-white text-xs tracking-widest uppercase px-4 py-2 font-bold flex items-center gap-2">
+              <div className="absolute top-0 right-6 md:right-10 -translate-y-1/2 bg-[#c5a880] text-white text-xs tracking-widest uppercase px-4 py-2 font-bold flex items-center gap-2">
                 <Lightbulb className="w-3 h-3" /> GITC Way
               </div>
             )}

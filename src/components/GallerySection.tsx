@@ -116,15 +116,15 @@ export default function GallerySection() {
       {/* Gallery Controls */}
       <div className="bg-white p-4 border-b-2 border-neutral-900 sticky top-20 z-40 mb-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex w-full md:w-auto">
+          <div className="flex flex-wrap justify-center w-full md:w-auto gap-2 mb-2">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-4 border-t-2 border-l-2 border-r-2 -mb-0.5 text-sm transition-all duration-300  tracking-wide ${
+                className={`flex-none flex items-center justify-center gap-2 px-4 py-3 md:px-6 md:py-4 border-2 text-sm transition-all duration-300 tracking-wide rounded-full md:rounded-none md:border-b-0 md:-mb-0.5 md:border-t-2 md:border-l-2 md:border-r-2 ${
                   activeCategory === cat.id
                     ? "border-neutral-900 bg-neutral-900 text-white"
-                    : "border-transparent text-neutral-300 hover:text-neutral-900"
+                    : "border-neutral-200 text-neutral-500 hover:text-neutral-900 hover:border-neutral-300 bg-white"
                 }`}
               >
                 {cat.icon}
