@@ -118,9 +118,9 @@ export default function FAQSection() {
             <p className="text-neutral-600 font-light mb-6">더 궁금하신 점이 있으신가요?</p>
             <button
               onClick={() => {
-                const registerSection = document.getElementById("register");
-                if (registerSection) {
-                  registerSection.scrollIntoView({ behavior: "smooth" });
+                const inquirySection = document.getElementById("inquiry");
+                if (inquirySection) {
+                  inquirySection.scrollIntoView({ behavior: "smooth" });
                 }
               }}
               className="inline-flex items-center justify-center border border-[#c5a880] text-[#c5a880] hover:bg-[#c5a880] hover:text-white px-8 py-3 text-sm tracking-widest uppercase font-semibold transition-colors"

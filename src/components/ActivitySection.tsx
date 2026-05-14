@@ -19,6 +19,8 @@ import {
 } from "lucide-react";
 
 export default function ActivitySection() {
+  const bgImage = "https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=2070&auto=format&fit=crop";
+
   const activities = [
     {
       title: "골든벨 퀴즈",
@@ -63,8 +65,16 @@ export default function ActivitySection() {
   ];
 
   return (
-    <div className="space-y-16">
-      <div className="text-center max-w-3xl mx-auto mb-16">
+    <div className="relative space-y-16 py-24 object-cover overflow-hidden">
+      {/* Background Image with Blur */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-fixed z-0 scale-105"
+        style={{ backgroundImage: `url(${bgImage})`, filter: "blur(4px)" }}
+      />
+      {/* Light Overlay to ensure text readability */}
+      <div className="absolute inset-0 bg-white/85 z-0" />
+
+      <div className="relative z-10 text-center max-w-3xl mx-auto mb-16">
         <span className="text-[#96754a] font-semibold tracking-[0.2em] text-xs mb-4 block uppercase flex items-center justify-center gap-2">
           <span className="w-8 h-[1px] bg-[#96754a]"></span>
           Camp Activities
@@ -80,27 +90,27 @@ export default function ActivitySection() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 max-w-6xl mx-auto border-t border-l border-neutral-200/50 bg-white">
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 max-w-6xl mx-auto border-t border-l border-neutral-200/50 bg-white/70 backdrop-blur-sm shadow-xl">
         {activities.map((act, i) => (
           <motion.div
             key={i}
-            whileHover={{ backgroundColor: "#fcfbf9" }}
+            whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.95)" }}
             className="group p-8 border-b border-r border-neutral-200/50 transition-colors"
           >
             <div className="text-[#c5a880] mb-6 opacity-70 group-hover:opacity-100 transition-opacity">
               {act.icon}
             </div>
-            <h3 className="text-lg  font-bold text-neutral-900 mb-3 tracking-wide">
+            <h3 className="text-lg font-bold text-neutral-900 mb-3 tracking-wide">
               {act.title}
             </h3>
-            <p className="text-neutral-600  text-sm leading-relaxed">
+            <p className="text-neutral-600 text-sm leading-relaxed">
               {act.desc}
             </p>
           </motion.div>
         ))}
       </div>
 
-      <div className="bg-[#0a0a0a] text-center p-12 md:p-16 max-w-5xl mx-auto relative overflow-hidden group border border-[#c5a880]/20">
+      <div className="bg-[#0a0a0a]/90 text-center p-12 md:p-16 max-w-5xl mx-auto relative overflow-hidden group border border-[#c5a880]/20 shadow-2xl z-10 backdrop-blur-md">
         <div className="absolute inset-0 bg-[#c5a880] opacity-0 group-hover:opacity-[0.03] transition-opacity duration-1000 pointer-events-none"></div>
         <div className="relative z-10">
           <h3 className=" italic text-2xl text-[#c5a880] mb-8  tracking-wide">

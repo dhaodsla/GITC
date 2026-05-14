@@ -1,17 +1,16 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Camera,
-  ImagePlus,
   Star,
   Home,
   Utensils,
   X,
   MapPin,
+  Building,
 } from "lucide-react";
-import { get, set } from "idb-keyval";
 
-type CategoryType = "dormitory" | "meals" | "activities" | "field_trips";
+type CategoryType = "dormitory" | "meals" | "activities" | "field_trips" | "cebu_campus";
 
 const CATEGORIES: {
   id: CategoryType;
@@ -19,6 +18,12 @@ const CATEGORIES: {
   icon: React.ReactNode;
   desc: string;
 }[] = [
+  {
+    id: "cebu_campus",
+    label: "세부캠퍼스",
+    icon: <Building className="w-5 h-5" />,
+    desc: "공부 방해가 없는 최적의 면학 분위기, 세부 캠퍼스",
+  },
   {
     id: "dormitory",
     label: "숙소 (기숙사)",
@@ -45,76 +50,39 @@ const CATEGORIES: {
   },
 ];
 
-const DEFAULT_PHOTOS = {
-  dormitory: [
+const dormFiles = import.meta.glob('/public/dormitory/*.{jpg,jpeg,png,webp,gif,JPG,JPEG,PNG,WEBP,GIF}', { eager: true });
+const mealFiles = import.meta.glob('/public/meals/*.{jpg,jpeg,png,webp,gif,JPG,JPEG,PNG,WEBP,GIF}', { eager: true });
+const activityFiles = import.meta.glob('/public/activities/*.{jpg,jpeg,png,webp,gif,JPG,JPEG,PNG,WEBP,GIF}', { eager: true });
+const fieldTripFiles = import.meta.glob('/public/field_trips/*.{jpg,jpeg,png,webp,gif,JPG,JPEG,PNG,WEBP,GIF}', { eager: true });
+const cebuCampusFiles = import.meta.glob('/public/cebu_campus/*.{jpg,jpeg,png,webp,gif,JPG,JPEG,PNG,WEBP,GIF}', { eager: true });
+
+const getPaths = (files: Record<string, unknown>) => Object.keys(files).map((key) => import.meta.env.BASE_URL + encodeURI(key.replace('/public/', '')));
+
+const DEFAULT_PHOTOS: Record<CategoryType, string[]> = {
+  cebu_campus: getPaths(cebuCampusFiles).length > 0 ? getPaths(cebuCampusFiles) : [
+    "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=600&auto=format&fit=crop",
+  ],
+  dormitory: getPaths(dormFiles).length > 0 ? getPaths(dormFiles) : [
     "https://images.unsplash.com/photo-1540518614846-7eded433c457?q=80&w=600&auto=format&fit=crop",
   ],
-  meals: [
+  meals: getPaths(mealFiles).length > 0 ? getPaths(mealFiles) : [
     "https://images.unsplash.com/photo-1598514982205-f36b96d1ea8d?q=80&w=600&auto=format&fit=crop",
   ],
-  activities: [
+  activities: getPaths(activityFiles).length > 0 ? getPaths(activityFiles) : [
     "https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=600&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=600&auto=format&fit=crop",
   ],
-  field_trips: [
+  field_trips: getPaths(fieldTripFiles).length > 0 ? getPaths(fieldTripFiles) : [
     "https://images.unsplash.com/photo-1603354350317-6f7abe2ef31b?q=80&w=600&auto=format&fit=crop",
   ],
 };
 
 export default function GallerySection() {
   const [activeCategory, setActiveCategory] =
-    useState<CategoryType>("activities");
-  const [photos, setPhotos] =
-    useState<Record<CategoryType, string[]>>(DEFAULT_PHOTOS);
+    useState<CategoryType>("meals");
   const [isFullscreen, setIsFullscreen] = useState<string | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    // Load from IndexedDB
-    get("gitc_gallery_photos").then((val) => {
-      if (val) {
-        setPhotos({ ...DEFAULT_PHOTOS, ...val });
-      }
-    });
-  }, []);
-
-  const handleUploadClick = () => {
-    fileInputRef.current?.click();
-  };
-
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files || files.length === 0) return;
-
-    const newPhotosUrlPromises = Array.from(files).map((file: File) => {
-      return new Promise<string>((resolve) => {
-        const reader = new FileReader();
-        reader.onload = (ev) => resolve(ev.target?.result as string);
-        reader.readAsDataURL(file);
-      });
-    });
-
-    const urls = await Promise.all(newPhotosUrlPromises);
-    const currentList = photos[activeCategory];
-    const combined = [...urls, ...currentList].slice(0, 50); // 최신 사진이 상단, 최대 50장 제한
-
-    const updatedPhotos = { ...photos, [activeCategory]: combined };
-    setPhotos(updatedPhotos);
-    set("gitc_gallery_photos", updatedPhotos);
-
-    // Reset file input
-    if (fileInputRef.current) fileInputRef.current.value = "";
-  };
-
-  const handleDeleteClick = (indexToDelete: number, e: React.MouseEvent) => {
-    e.stopPropagation();
-    const updatedList = photos[activeCategory].filter(
-      (_, i) => i !== indexToDelete,
-    );
-    const updatedPhotos = { ...photos, [activeCategory]: updatedList };
-    setPhotos(updatedPhotos);
-    set("gitc_gallery_photos", updatedPhotos);
-  };
+  const photos = DEFAULT_PHOTOS;
 
   return (
     <div className="space-y-12">
@@ -164,32 +132,6 @@ export default function GallerySection() {
               </button>
             ))}
           </div>
-
-          <div className="w-full md:w-auto flex items-center justify-between md:justify-end gap-6 px-2 md:px-0">
-            <div className="text-sm  text-neutral-300 tracking-widest">
-              <span className="text-neutral-900 font-medium">
-                {photos[activeCategory].length}
-              </span>{" "}
-              / 50 PHOTOS
-            </div>
-            {/* hidden file input */}
-            <input
-              type="file"
-              accept="image/*"
-              multiple
-              className="hidden"
-              ref={fileInputRef}
-              onChange={handleFileChange}
-            />
-            <button
-              onClick={handleUploadClick}
-              disabled={photos[activeCategory].length >= 50}
-              className="flex items-center gap-2 bg-[#0a0a0a] hover:bg-[#c5a880] disabled:bg-neutral-200 disabled:text-neutral-300 text-white px-6 py-3 font-semibold tracking-widest text-xs uppercase transition-colors"
-            >
-              <ImagePlus className="w-4 h-4" />
-              업로드
-            </button>
-          </div>
         </div>
 
         <div className="mt-4 pt-4 border-t border-neutral-100/50 text-center text-neutral-600  text-sm">
@@ -238,14 +180,6 @@ export default function GallerySection() {
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       loading="lazy"
                     />
-
-                    {/* Delete button (only visible on hover) */}
-                    <button
-                      onClick={(e) => handleDeleteClick(idx, e)}
-                      className="absolute top-2 right-2 p-1.5 bg-black/50 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-500"
-                    >
-                      <X className="w-4 h-4" />
-                    </button>
 
                     <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent p-3 opacity-0 group-hover:opacity-100 transition-opacity">
                       <span className="text-white text-xs font-bold shadow-sm">

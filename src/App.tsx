@@ -761,7 +761,7 @@ function UniversitySection() {
       <div className="bg-white p-6 md:p-12 shadow-[0_4px_40px_rgba(0,0,0,0.04)] border border-neutral-100 flex flex-col xl:flex-row gap-12 items-center">
         <div className="w-full xl:w-1/2 relative bg-[#f5f2ed] p-4 md:p-8">
           <img
-            src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop"
+            src={`${import.meta.env.BASE_URL}cebu_campus/gitc-campus.jpg`}
             alt="University Campus"
             className="w-full h-auto object-cover aspect-[4/3] filter contrast-125 saturate-50"
           />
@@ -1234,11 +1234,45 @@ function ScheduleSection() {
 
 function InquirySection() {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 5000); // 5초 후 리셋
+    setIsSubmitting(true);
+    
+    const formData = new FormData(e.currentTarget);
+    const parentName = formData.get("parentName") as string;
+    const contact = formData.get("contact") as string;
+    const grade = formData.get("grade") as string;
+    const inquiry = formData.get("inquiry") as string;
+
+    try {
+      const response = await fetch("/api/inquiry", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          parentName,
+          contact,
+          grade,
+          inquiry,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || "서버 에러가 발생했습니다.");
+      }
+
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 5000); // 5초 후 리셋
+    } catch (error: any) {
+      alert(`상담 신청 발송에 실패했습니다:\n${error.message}`);
+      console.error(error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -1386,6 +1420,7 @@ function InquirySection() {
                   <input
                     required
                     type="text"
+                    name="parentName"
                     placeholder="홍길동"
                     className="w-full px-0 py-3 bg-transparent border-b border-neutral-300 focus:border-[#c5a880] outline-none transition-colors rounded-none placeholder:text-neutral-300  text-sm"
                   />
@@ -1397,6 +1432,7 @@ function InquirySection() {
                   <input
                     required
                     type="tel"
+                    name="contact"
                     placeholder="010-0000-0000"
                     className="w-full px-0 py-3 bg-transparent border-b border-neutral-300 focus:border-[#c5a880] outline-none transition-colors rounded-none placeholder:text-neutral-300  text-sm"
                   />
@@ -1406,7 +1442,10 @@ function InquirySection() {
                 <label className="block text-xs font-semibold tracking-widest text-[#96754a] uppercase mb-2">
                   자녀 학년
                 </label>
-                <select className="w-full px-0 py-3 bg-transparent border-b border-neutral-300 focus:border-[#c5a880] outline-none transition-colors rounded-none  text-sm text-neutral-700 cursor-pointer appearance-none">
+                <select
+                  name="grade"
+                  className="w-full px-0 py-3 bg-transparent border-b border-neutral-300 focus:border-[#c5a880] outline-none transition-colors rounded-none  text-sm text-neutral-700 cursor-pointer appearance-none"
+                >
                   <option value="">학년을 선택해주세요</option>
                   <option value="elem-low">초등학교 저학년 (1~3학년)</option>
                   <option value="elem-high">초등학교 고학년 (4~6학년)</option>
@@ -1418,6 +1457,7 @@ function InquirySection() {
                   문의 내용
                 </label>
                 <textarea
+                  name="inquiry"
                   rows={3}
                   placeholder="궁금한 사항을 편하게 적어주세요."
                   className="w-full px-0 py-3 bg-transparent border-b border-neutral-300 focus:border-[#c5a880] outline-none transition-colors rounded-none resize-none placeholder:text-neutral-300  text-sm"
@@ -1425,9 +1465,10 @@ function InquirySection() {
               </div>
               <button
                 type="submit"
-                className="w-full bg-[#0a0a0a] hover:bg-[#c5a880] text-white font-semibold tracking-[0.2em] uppercase text-sm py-5 transition-colors mt-4"
+                disabled={isSubmitting}
+                className="w-full bg-[#0a0a0a] hover:bg-[#c5a880] disabled:bg-neutral-400 text-white font-semibold tracking-[0.2em] uppercase text-sm py-5 transition-colors mt-4"
               >
-                무료 상담 신청하기
+                {isSubmitting ? "전송 중..." : "무료 상담 신청하기"}
               </button>
               <p className="text-xs text-neutral-300 text-center mt-6 ">
                 * 입력하신 정보는 상담 목적으로만 사용되며 안전하게 보호됩니다.
@@ -1441,15 +1482,10 @@ function InquirySection() {
       <div className="fixed bottom-8 right-8 z-[90] flex flex-col gap-3 items-end">
         {/* 상담 신청 버튼 */}
         <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            const elm = document.getElementById("inquiry");
-            if (elm) {
-              elm.scrollIntoView({ behavior: "smooth" });
-            }
-          }}
-          className="group relative flex items-center justify-center w-14 h-14 bg-[#c5a880] text-[#0a0a0a] rounded-full shadow-2xl hover:scale-105 transition-all"
+          href="https://open.kakao.com/o/sPhkO0ji"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative flex items-center justify-center w-14 h-14 bg-[#fae100] text-[#371d1e] rounded-full shadow-2xl hover:scale-105 transition-all"
         >
           <span className="absolute right-full mr-4 whitespace-nowrap bg-[#0a0a0a] text-[#c5a880] text-xs px-3 py-2 border border-[#c5a880]/30 opacity-0 group-hover:opacity-100 transition-opacity tracking-widest uppercase font-semibold pointer-events-none">
             빠른 상담

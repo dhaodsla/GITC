@@ -66,7 +66,7 @@ export default function InfoSection() {
               <span>
                 <strong className="text-neutral-900 font-medium">의류:</strong>{" "}
                 넉넉한 여름옷, 얇은 긴팔/가디건(강의실 에어컨 완비), 속옷, 양말,
-                운동화, 편한 슬리퍼
+                운동화, 편한 슬리퍼, 빨래망
               </span>
             </li>
             <li className="flex items-start gap-4 border-t border-neutral-50 pt-6">
@@ -77,7 +77,7 @@ export default function InfoSection() {
                 <strong className="text-neutral-900 font-medium">
                   세면/위생:
                 </strong>{" "}
-                칫솔, 치약, 샤워타월, 스킨로션, 선크림,{" "}
+                칫솔, 치약, 스킨로션, 선크림,{" "}
                 <span className="text-[#96754a] font-medium border-b border-[#96754a]/30 pb-0.5">
                   개인 상비약(종합감기약, 장염약, 밴드 등)
                 </span>
@@ -100,7 +100,7 @@ export default function InfoSection() {
               </span>
               <span>
                 <strong className="text-neutral-900 font-medium">용돈:</strong>{" "}
-                약 $100~$150 (미화로 준비, 현지에서 페소로 안전하게 환전 진행)
+                약 5만~10만 (한화, 현지에서 페소로 안전하게 환전 진행 / 쇼핑 or 간식)
               </span>
             </li>
           </ul>
