@@ -114,9 +114,9 @@ export default function GallerySection() {
       </motion.div>
 
       {/* Gallery Controls */}
-      <div className="bg-white p-4 border-b-2 border-neutral-900 sticky top-20 z-40 mb-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex flex-wrap justify-center w-full md:w-auto gap-2 mb-2">
+      <div className="bg-white p-4 border-b-2 border-neutral-900 sticky top-20 z-40 mb-8 max-w-[100vw] overflow-hidden">
+        <div className="w-full overflow-x-auto pb-4 -mb-4 custom-scrollbar">
+          <div className="flex flex-nowrap md:flex-wrap md:justify-center min-w-max md:min-w-0 px-2 gap-2">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat.id}
@@ -128,7 +128,7 @@ export default function GallerySection() {
                 }`}
               >
                 {cat.icon}
-                {cat.label}
+                <span className="whitespace-nowrap">{cat.label}</span>
               </button>
             ))}
           </div>

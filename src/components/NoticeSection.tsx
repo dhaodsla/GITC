@@ -23,25 +23,25 @@ export default function NoticeSection() {
           className="border border-[#c5a880]/20 p-10 md:p-16 flex flex-col lg:flex-row gap-16 backdrop-blur-sm"
         >
           {/* Header Area */}
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-[#c5a880]/50 text-[#c5a880] text-xs font-semibold tracking-[0.2em] uppercase mb-8">
               <Bell className="w-3 h-3" />
               Now Recruiting
             </div>
-            <h2 className="text-4xl md:text-5xl   mb-6 leading-tight">
+            <h2 className="text-4xl md:text-5xl   mb-6 leading-tight break-keep">
               2026 여름방학 영어캠프
               <br className="hidden md:block" /> 참가자 모집
             </h2>
-            <p className="text-neutral-300 text-lg mb-10  leading-relaxed">
+            <p className="text-neutral-300 text-lg mb-10  leading-relaxed break-keep">
               23년 전통의 GITC 프리미엄! 체계적인 관리와 완벽한 몰입 환경으로
               아이들의 영어를 바꿔줄 특별한 여름을 준비하세요.
             </p>
             <div className="flex flex-col gap-4">
-              <div className="inline-flex items-center gap-3 bg-white text-black px-6 py-4 border-l-2 border-[#c5a880] text-sm md:w-max">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 bg-white text-black px-6 py-4 border-l-2 border-[#c5a880] text-sm break-keep">
                 <span className="font-semibold text-[#c5a880] uppercase tracking-widest text-xs shrink-0">
                   Early Bird
                 </span>
-                <span className="font-medium">
+                <span className="font-medium leading-relaxed">
                   5월 31일까지 등록 시 유류할증료 최대 20만원 지원
                 </span>
               </div>
