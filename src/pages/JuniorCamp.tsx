@@ -333,11 +333,11 @@ export default function JuniorCamp() {
               </button>
               <div className="w-full overflow-hidden rounded-2xl shadow-2xl bg-white relative">
                 <img
-                  src="/promo-junior.jpg"
+                  src={`${import.meta.env.BASE_URL}promo-junior.png`}
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    if (target.src.includes('promo-junior.jpg')) {
-                      target.src = '/promo.jpg';
+                    if (target.src.includes('promo-junior.png')) {
+                      target.src = `${import.meta.env.BASE_URL}promo.jpg`;
                     } else if (target.src.includes('promo.jpg')) {
                       target.src = "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=800&auto=format&fit=crop";
                     }
