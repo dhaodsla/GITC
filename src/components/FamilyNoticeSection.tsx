@@ -117,37 +117,37 @@ export default function FamilyNoticeSection() {
                 <div className="flex flex-col gap-1.5">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#c5a880] shrink-0" />
-                    <span className="text-white font-medium text-sm">1:1 맞춤형 수업</span>
+                    <span className="text-white font-medium text-sm">숙식</span>
                   </div>
-                  <span className="text-neutral-400 text-xs pl-6">자녀 집중 스피킹 & 부모님 회화</span>
+                  <span className="text-neutral-400 text-xs pl-6">전 일정 3식 제공 및 프리미엄 기숙사</span>
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#c5a880] shrink-0" />
-                    <span className="text-white font-medium text-sm">프리미엄 기숙사</span>
+                    <span className="text-white font-medium text-sm">수업 및 기본교재</span>
                   </div>
-                  <span className="text-neutral-400 text-xs pl-6">가족 전용 레지던스/호텔형 제공</span>
+                  <span className="text-neutral-400 text-xs pl-6">맞춤형 수업과 교재 제공</span>
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#c5a880] shrink-0" />
-                    <span className="text-white font-medium text-sm">전 일정 3식 제공</span>
+                    <span className="text-white font-medium text-sm">무료 화상 영어 제공</span>
                   </div>
-                  <span className="text-neutral-400 text-xs pl-6">영양 만점 한식 위주의 맛있는 식단</span>
+                  <span className="text-neutral-400 text-xs pl-6">과정 중 추가 혜택 제공</span>
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#c5a880] shrink-0" />
-                    <span className="text-white font-medium text-sm">무료 케어 서비스</span>
+                    <span className="text-white font-medium text-sm">공항 픽드랍</span>
                   </div>
-                  <span className="text-neutral-400 text-xs pl-6">정기적인 세탁 및 방 청소 포함</span>
+                  <span className="text-neutral-400 text-xs pl-6">안전한 공항 이동 서비스</span>
                 </div>
               </div>
               <div className="mt-8 pt-6 border-t border-neutral-800/50">
                   <div className="flex items-start gap-3">
                     <AlertCircle className="w-4 h-4 text-neutral-500 shrink-0 mt-0.5" />
                     <span className="text-neutral-400 text-xs leading-relaxed">
-                      ※ 항공권, 비자 등 현지납부비용은 불포함입니다. 상세 옵션에 따라 비용이 상이하므로 보다 정확한 견적은 블로그 링크 및 상담을 통해 확인 부탁드립니다.
+                      ※ 위 포함내역을 제외한 비용(항공권, 비자, 액티비티 요금 등 기타 현지 납부 비용)은 불포함입니다. 불포함 항목의 상세 비용은 블로그 링크 및 상담을 통해 확인 부탁드립니다.
                     </span>
                   </div>
               </div>

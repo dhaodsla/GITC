@@ -21,10 +21,10 @@ import { Link } from "react-router-dom";
 
 import GallerySection from "../components/GallerySection";
 import FamilyInfoSection from "../components/FamilyInfoSection";
-import ActivitySection from "../components/ActivitySection";
+import FamilyActivitySection from "../components/FamilyActivitySection";
 import FieldTripSection from "../components/FieldTripSection";
 import FamilyNoticeSection from "../components/FamilyNoticeSection";
-import FAQSection from "../components/FAQSection";
+import FamilyFAQSection from "../components/FamilyFAQSection";
 
 const tabs = [
   { id: "home", label: "홈" },
@@ -198,7 +198,7 @@ export default function FamilyCamp() {
           <ScheduleSection />
         </div>
         <div id="activity">
-          <ActivitySection />
+          <FamilyActivitySection />
         </div>
         <div id="fieldtrip">
           <FieldTripSection />
@@ -210,7 +210,7 @@ export default function FamilyCamp() {
           <FamilyInfoSection />
         </div>
         <div id="faq">
-          <FAQSection />
+          <FamilyFAQSection />
         </div>
         <div id="inquiry">
           <InquirySection />
@@ -877,18 +877,15 @@ function UniversitySection() {
             
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-5 gap-x-4 text-sm text-neutral-700 font-medium">
               <li className="flex items-center gap-3"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>숙식</li>
-              <li className="flex items-center gap-3"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>수업 및 교재</li>
-              <li className="flex items-center gap-3"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>액티비티 (평일+주말)</li>
-              <li className="flex items-center gap-3"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>여행자 보험</li>
-              <li className="flex items-center gap-3"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>SSP 발급비</li>
-              <li className="flex items-center gap-3"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>공증비</li>
-              <li className="flex items-center gap-3"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>입국세</li>
-              <li className="flex items-center gap-3"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>단체 티</li>
-              <li className="flex items-center gap-3"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>세탁 및 룸 클리닝 서비스</li>
-              <li className="flex items-center gap-3"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>매일 사진·영상 업로드</li>
-              <li className="flex items-center gap-3"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>한국인 매니저 24시간 케어</li>
+              <li className="flex items-center gap-3"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>수업 및 기본교재</li>
+              <li className="flex items-center gap-3"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>공항 픽드랍</li>
               <li className="flex items-center gap-3 text-[#c5a880]"><div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#c5a880]"></div>무료 화상 영어 제공</li>
             </ul>
+            <div className="mt-8 pt-6 border-t border-neutral-100 flex items-start gap-3">
+              <span className="text-neutral-500 text-xs leading-relaxed">
+                ※ 위 항목 외 나머지(항공권, 비자, SSP 발급비, 여행자 보험, 액티비티 비용 등)는 모두 불포함입니다.
+              </span>
+            </div>
           </div>
         </div>
 
@@ -979,23 +976,10 @@ function CurriculumSection() {
               </span>
               <div>
                 <strong className="block text-neutral-900 text-lg mb-2  tracking-wide">
-                  1:4 그룹 수업 (2타임)
+                  그룹 수업 (4타임)
                 </strong>
                 <p className="text-neutral-600  leading-relaxed text-sm">
                   비슷한 레벨의 친구들과 함께 토론 및 액티비티를 진행하여 영어 발표의 자신감을 기릅니다.
-                </p>
-              </div>
-            </li>
-            <li className="flex items-start gap-5">
-              <span className=" italic text-2xl text-[#c5a880] leading-none mt-1">
-                03
-              </span>
-              <div>
-                <strong className="block text-neutral-900 text-lg mb-2  tracking-wide">
-                  원어민 특화 & 자기주도 (2타임)
-                </strong>
-                <p className="text-neutral-600  leading-relaxed text-sm">
-                  서양 원어민 튜터의 발음 교정 시간(1타임)과 단어 암기 및 영어 일기를 쓰는 자기주도학습(1타임)으로 기본기를 다집니다.
                 </p>
               </div>
             </li>
