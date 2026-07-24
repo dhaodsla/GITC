@@ -774,68 +774,15 @@ function UniversitySection() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto mt-8">
-        {/* 안심 올케어 시스템 */}
-        <div className="bg-[#0a0a0a] text-white p-8 md:p-12 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-48 h-48 bg-[#c5a880] opacity-10 rounded-full filter blur-[50px] transform translate-x-1/3 -translate-y-1/3" />
-          <div className="relative z-10">
-            <span className="text-[#c5a880] text-sm tracking-widest font-semibold uppercase mb-3 block">Total Care System</span>
-            <h3 className="text-3xl mb-8 leading-tight">
-              안전 관리, 확실하게 준비했습니다<br />안심 올케어 시스템
-            </h3>
-            
-            <div className="space-y-6 mb-8">
-              <div className="flex flex-col gap-3">
-                <div className="flex items-center gap-4 bg-white/5 p-4 border border-white/10">
-                  <span className="text-[#c5a880] font-bold">1차 케어</span>
-                  <span className="text-neutral-300 text-sm">강사 1명 + 학생 2~3명 (Room Stay)</span>
-                </div>
-                <div className="flex items-center gap-4 bg-white/5 p-4 border border-white/10 ml-4">
-                  <span className="text-[#c5a880] font-bold">2차 케어</span>
-                  <span className="text-neutral-300 text-sm">Team Manager - Korean</span>
-                </div>
-                <div className="flex items-center gap-4 bg-white/5 p-4 border border-white/10 ml-8">
-                  <span className="text-[#c5a880] font-bold">3차 케어</span>
-                  <span className="text-neutral-300 text-sm">총괄 및 총장</span>
-                </div>
-              </div>
-            </div>
-
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-neutral-400">
-              <li className="flex items-start gap-2">
-                <span className="text-[#c5a880] mt-1">✓</span>
-                학생 2~3명 + 튜터 선생님 1명 Room Stay
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-[#c5a880] mt-1">✓</span>
-                24시간 상시 케어 및 관리
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-[#c5a880] mt-1">✓</span>
-                영어 사용 환경 유지
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-[#c5a880] mt-1">✓</span>
-                이상 징후 즉각 대응
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-[#c5a880] mt-1">✓</span>
-                응급 상황 즉시 조치 (한인 병원 연계)
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-[#c5a880] mt-1">✓</span>
-                출입 통제 및 안전 시스템 정비
-              </li>
-            </ul>
-          </div>
-        </div>
-
+      <div className="max-w-3xl mx-auto mt-8">
         {/* 프리미엄 기숙사 */}
         <div className="bg-[#f5f2ed] border border-[#e5e1db] p-8 md:p-12 flex flex-col justify-center">
-          <span className="text-[#96754a] text-sm tracking-widest font-semibold uppercase mb-3 block">Accommodation</span>
-          <h3 className="text-3xl text-neutral-900 mb-8 leading-tight">
-            아이의 하루를 지켜주는<br />프리미엄 기숙사 지원
-          </h3>
+          <div className="text-center">
+            <span className="text-[#96754a] text-sm tracking-widest font-semibold uppercase mb-3 block">Accommodation</span>
+            <h3 className="text-3xl text-neutral-900 mb-8 leading-tight">
+              아이의 하루를 지켜주는<br />프리미엄 기숙사 지원
+            </h3>
+          </div>
           
           <div className="space-y-8">
             <div className="bg-white p-6 shadow-sm border border-neutral-100 flex items-start gap-4">
