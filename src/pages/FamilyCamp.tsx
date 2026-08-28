@@ -346,7 +346,7 @@ function HomeSection({
           initial={{ scale: 1.05 }}
           animate={{ scale: 1 }}
           transition={{ duration: 3, ease: "easeOut" }}
-          src={`${import.meta.env.BASE_URL}gitc-campus.jpg`}
+          src={`${import.meta.env.BASE_URL}cebu_campus/gitc-campus.jpg`}
           onError={(e) => {
             // Fallback image if user hasn't uploaded it yet
             (e.target as HTMLImageElement).src =

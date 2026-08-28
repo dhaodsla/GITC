@@ -50,13 +50,26 @@ const CATEGORIES: {
   },
 ];
 
-const dormFiles = import.meta.glob('/public/dormitory/*.{jpg,jpeg,png,webp,gif,JPG,JPEG,PNG,WEBP,GIF}', { eager: true });
-const mealFiles = import.meta.glob('/public/meals/*.{jpg,jpeg,png,webp,gif,JPG,JPEG,PNG,WEBP,GIF}', { eager: true });
-const activityFiles = import.meta.glob('/public/activities/*.{jpg,jpeg,png,webp,gif,JPG,JPEG,PNG,WEBP,GIF}', { eager: true });
-const fieldTripFiles = import.meta.glob('/public/field_trips/*.{jpg,jpeg,png,webp,gif,JPG,JPEG,PNG,WEBP,GIF}', { eager: true });
-const cebuCampusFiles = import.meta.glob('/public/cebu_campus/*.{jpg,jpeg,png,webp,gif,JPG,JPEG,PNG,WEBP,GIF}', { eager: true });
+const dormFiles = import.meta.glob<string>('/public/dormitory/*.{jpg,jpeg,png,webp,gif,JPG,JPEG,PNG,WEBP,GIF}', { eager: true, import: 'default' });
+const mealFiles = import.meta.glob<string>('/public/meals/*.{jpg,jpeg,png,webp,gif,JPG,JPEG,PNG,WEBP,GIF}', { eager: true, import: 'default' });
+const activityFiles = import.meta.glob<string>('/public/activities/*.{jpg,jpeg,png,webp,gif,JPG,JPEG,PNG,WEBP,GIF}', { eager: true, import: 'default' });
+const fieldTripFiles = import.meta.glob<string>('/public/field_trips/*.{jpg,jpeg,png,webp,gif,JPG,JPEG,PNG,WEBP,GIF}', { eager: true, import: 'default' });
+const cebuCampusFiles = import.meta.glob<string>('/public/cebu_campus/*.{jpg,jpeg,png,webp,gif,JPG,JPEG,PNG,WEBP,GIF}', { eager: true, import: 'default' });
 
-const getPaths = (files: Record<string, unknown>) => Object.keys(files).map((key) => import.meta.env.BASE_URL + encodeURI(key.replace('/public/', '')));
+const getPaths = (files: Record<string, unknown>) => {
+  return Object.entries(files).map(([key, val]) => {
+    if (typeof val === 'string' && val.length > 0) {
+      return val;
+    }
+    if (val && typeof val === 'object' && 'default' in val && typeof (val as { default: string }).default === 'string') {
+      return (val as { default: string }).default;
+    }
+    const cleanPath = key.replace(/^\/public\//, '');
+    const base = import.meta.env.BASE_URL || '/';
+    const separator = base.endsWith('/') ? '' : '/';
+    return `${base}${separator}${encodeURI(cleanPath)}`;
+  });
+};
 
 const DEFAULT_PHOTOS: Record<CategoryType, string[]> = {
   cebu_campus: getPaths(cebuCampusFiles).length > 0 ? getPaths(cebuCampusFiles) : [
