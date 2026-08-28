@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence, useScroll, useSpring } from "motion/react";
+import { motion, useScroll, useSpring } from "motion/react";
 import {
   BookOpen,
   Clock,
@@ -14,7 +14,6 @@ import {
   Image as ImageIcon,
   Info,
   Star,
-  X,
   ArrowUp,
 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -42,7 +41,6 @@ const tabs = [
 
 export default function JuniorCamp() {
   const [activeTab, setActiveTab] = useState("home");
-  const [showPromoModal, setShowPromoModal] = useState(true);
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -307,63 +305,6 @@ export default function JuniorCamp() {
           </div>
         </div>
       </footer>
-
-      {/* Promo Image Modal - Junior */}
-      <AnimatePresence>
-        {showPromoModal && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 pb-20">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-              onClick={() => setShowPromoModal(false)}
-            />
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              className="relative w-full max-w-lg bg-transparent z-10 flex flex-col items-center"
-            >
-              <button
-                onClick={() => setShowPromoModal(false)}
-                className="absolute -top-12 right-0 sm:-right-12 p-2 text-white/70 hover:text-white transition-colors"
-              >
-                <X className="w-8 h-8" />
-              </button>
-              <div className="w-full overflow-hidden rounded-2xl shadow-2xl bg-white relative">
-                <img
-                  src={`${import.meta.env.BASE_URL}promo-junior.png`}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    if (target.src.includes('promo-junior.png')) {
-                      target.src = `${import.meta.env.BASE_URL}promo.jpg`;
-                    } else if (target.src.includes('promo.jpg')) {
-                      target.src = "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=800&auto=format&fit=crop";
-                    }
-                  }}
-                  alt="주니어캠프 특가 안내"
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-              <div className="mt-4 flex gap-4 w-full">
-                <button
-                  onClick={() => setShowPromoModal(false)}
-                  className="flex-1 py-3 px-4 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white rounded-xl text-sm font-medium transition-colors"
-                >
-                  오늘은 그만 보기
-                </button>
-                <button
-                  onClick={() => setShowPromoModal(false)}
-                  className="flex-1 py-3 px-4 bg-blue-600 hover:bg-blue-500 text-white shadow-lg rounded-xl text-sm font-bold transition-colors"
-                >
-                  닫기
-                </button>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
