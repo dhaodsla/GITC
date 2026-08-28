@@ -998,54 +998,102 @@ function CurriculumSection() {
 function ScheduleSection() {
   const scheduleData = [
     {
-      time: "07:00 - 08:00",
-      title: "기상",
-      desc: "활기찬 하루의 시작",
+      time: "08:00 - 08:15",
+      title: "캠퍼스 이동",
+      desc: "기숙사에서 캠퍼스로 안전하게 이동",
+      tag: "이동",
+      type: "move",
     },
     {
-      time: "08:00 - 08:55",
+      time: "08:15 - 08:40",
       title: "조식",
-      desc: "하루를 여는 든든한 아침",
+      desc: "하루를 시작하는 든든한 아침 식사",
+      tag: "조식",
+      type: "breakfast",
     },
     {
-      time: "08:55 - 12:25",
-      title: "오전 정규 수업 (4교시)",
-      desc: "1:1 원어민 클래스 및 그룹",
+      time: "08:40 - 09:25",
+      title: "수업 (1교시)",
+      desc: "몰입형 1:1 맞춤 / 그룹 영어 수업",
+      tag: "수업",
+      type: "class",
     },
     {
-      time: "12:25 - 13:25",
-      title: "중식 및 휴식",
-      desc: "영양 만점 한식 위주의 식단",
+      time: "09:35 - 10:20",
+      title: "수업 (2교시)",
+      desc: "몰입형 1:1 맞춤 / 그룹 영어 수업",
+      tag: "수업",
+      type: "class",
     },
     {
-      time: "13:25 - 17:00",
-      title: "오후 정규 수업 (4교시)",
-      desc: "1:1 맞춤형 스피킹 훈련",
+      time: "10:30 - 11:15",
+      title: "수업 (3교시)",
+      desc: "몰입형 1:1 맞춤 / 그룹 영어 수업",
+      tag: "수업",
+      type: "class",
     },
     {
-      time: "17:00 - 18:00",
-      title: "저녁식사",
-      desc: "친구들과 함께하는 저녁 식사",
+      time: "11:25 - 12:10",
+      title: "수업 (4교시)",
+      desc: "몰입형 1:1 맞춤 / 그룹 영어 수업",
+      tag: "수업",
+      type: "class",
     },
     {
-      time: "18:00 - 19:00",
+      time: "12:20 - 13:10",
+      title: "자습",
+      desc: "단어 암기 및 자기주도 학습",
+      tag: "자습",
+      type: "study",
+    },
+    {
+      time: "13:10 - 14:00",
+      title: "점심",
+      desc: "영양 만점 한식 뷔페 및 휴식",
+      tag: "점심",
+      type: "lunch",
+    },
+    {
+      time: "14:00 - 14:45",
+      title: "수업 (5교시)",
+      desc: "몰입형 1:1 맞춤 / 그룹 영어 수업",
+      tag: "수업",
+      type: "class",
+    },
+    {
+      time: "14:55 - 15:40",
+      title: "수업 (6교시)",
+      desc: "몰입형 1:1 맞춤 / 그룹 영어 수업",
+      tag: "수업",
+      type: "class",
+    },
+    {
+      time: "15:50 - 16:35",
+      title: "수업 (7교시)",
+      desc: "몰입형 1:1 맞춤 / 그룹 영어 수업",
+      tag: "수업",
+      type: "class",
+    },
+    {
+      time: "16:45 - 17:30",
+      title: "수업 (8교시)",
+      desc: "몰입형 1:1 맞춤 / 그룹 영어 수업",
+      tag: "수업",
+      type: "class",
+    },
+    {
+      time: "17:30 - 18:30",
+      title: "저녁",
+      desc: "친구들과 함께하는 맛있는 저녁 식사",
+      tag: "저녁",
+      type: "dinner",
+    },
+    {
+      time: "18:30 - 19:30",
       title: "액티비티",
-      desc: "수영, 체육 활동 또는 개인 휴식",
-    },
-    {
-      time: "19:00 - 20:00",
-      title: "수학 자습",
-      desc: "자기주도적 연산 및 수학 학습",
-    },
-    {
-      time: "20:00 - 20:30",
-      title: "자유시간 (부모님과 통화)",
-      desc: "가족과의 대화 및 휴식 시간",
-    },
-    {
-      time: "21:00 - 22:00",
-      title: "씻고 취침 준비",
-      desc: "샤워 및 다음 날을 위한 재충전",
+      desc: "골든벨, 스포츠, 영어 연극 등 다채로운 활동",
+      tag: "액티비티",
+      type: "activity",
     },
   ];
 
@@ -1053,51 +1101,80 @@ function ScheduleSection() {
     <div className="space-y-16">
       <div className="text-center max-w-2xl mx-auto mb-16">
         <span className="text-[#96754a] font-semibold tracking-[0.2em] text-xs mb-4 block uppercase border-b border-[#96754a]/30 pb-2 w-max mx-auto">
-          Routine
+          2027 Winter Camp Routine
         </span>
-        <h2 className="text-4xl md:text-5xl  text-neutral-900  mb-6">
-          일일 타임라인
+        <h2 className="text-4xl md:text-5xl text-neutral-900 mb-6 font-serif">
+          아이들 하루 일과
         </h2>
-        <p className="text-neutral-600 max-w-xl mx-auto  leading-relaxed">
-          지루할 틈 없이 알차게 짜여진
-          <br /> 프리미엄 평일 스케줄입니다.
+        <p className="text-neutral-600 max-w-xl mx-auto leading-relaxed">
+          캠프과정 하루 일정
+          <br />
+          <span className="text-sm text-neutral-500 font-medium mt-1 inline-block">
+            ★ 수업 후 저녁 액티비티까지, 영어로 채우는 하루 ★
+          </span>
         </p>
       </div>
 
-      <div className="max-w-4xl mx-auto bg-white shadow-[0_4px_40px_rgba(0,0,0,0.03)] border border-neutral-100 p-8 md:p-16">
+      <div className="max-w-4xl mx-auto bg-white shadow-[0_4px_40px_rgba(0,0,0,0.03)] border border-neutral-100 p-6 md:p-12">
         <div className="space-y-0">
-          {scheduleData.map((item, index) => (
-            <div
-              key={index}
-              className="group relative flex flex-col md:flex-row border-b border-neutral-100 last:border-0 hover:bg-[#fcfbf9] transition-colors"
-            >
-              <div className="w-full md:w-1/3 py-6 md:py-8 pr-8 flex flex-col justify-center">
-                <span className=" italic text-3xl md:text-4xl text-[#c5a880] mb-2 ">
-                  {item.time.includes("-") ? item.time.split("-")[0].trim() : item.time.trim()}
-                </span>
-                {item.time.includes("-") && (
-                  <span className="text-xs text-neutral-300 uppercase tracking-widest font-semibold">
-                    {item.time.split("-")[1].trim()}
+          {scheduleData.map((item, index) => {
+            const isHighlight = item.type === "breakfast" || item.type === "lunch" || item.type === "dinner" || item.type === "activity" || item.type === "study" || item.type === "move";
+            const tagBg =
+              item.type === "breakfast" || item.type === "lunch"
+                ? "bg-amber-50 text-amber-700 border-amber-200"
+                : item.type === "dinner"
+                ? "bg-rose-50 text-rose-700 border-rose-200"
+                : item.type === "activity"
+                ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                : item.type === "study"
+                ? "bg-blue-50 text-blue-700 border-blue-200"
+                : item.type === "move"
+                ? "bg-purple-50 text-purple-700 border-purple-200"
+                : "bg-neutral-50 text-neutral-700 border-neutral-200";
+
+            return (
+              <div
+                key={index}
+                className={`group relative flex flex-col md:flex-row border-b border-neutral-100 last:border-0 hover:bg-[#fcfbf9] transition-colors ${
+                  isHighlight ? "bg-neutral-50/40" : ""
+                }`}
+              >
+                <div className="w-full md:w-1/3 py-4 md:py-6 pr-6 flex items-center justify-between md:justify-start gap-4">
+                  <div className="flex flex-col">
+                    <span className="italic text-2xl md:text-3xl text-[#c5a880] font-serif">
+                      {item.time.includes("-") ? item.time.split("-")[0].trim() : item.time.trim()}
+                    </span>
+                    {item.time.includes("-") && (
+                      <span className="text-xs text-neutral-400 uppercase tracking-widest font-semibold">
+                        ~ {item.time.split("-")[1].trim()}
+                      </span>
+                    )}
+                  </div>
+                  <span className={`px-2.5 py-1 text-xs font-semibold rounded border ${tagBg} shrink-0`}>
+                    {item.tag}
                   </span>
-                )}
+                </div>
+                <div className="w-full md:w-2/3 py-3 md:py-6 md:pl-10 border-l-0 md:border-l border-neutral-100 flex flex-col justify-center">
+                  <h4 className="text-lg tracking-wide text-neutral-900 font-medium mb-1">
+                    {item.title}
+                  </h4>
+                  <p className="text-neutral-500 text-sm">{item.desc}</p>
+                </div>
               </div>
-              <div className="w-full md:w-2/3 py-4 md:py-8 md:pl-12 border-l-0 md:border-l border-neutral-100 flex flex-col justify-center">
-                <h4 className="text-xl  tracking-wide text-neutral-900 mb-2">
-                  {item.title}
-                </h4>
-                <p className="text-neutral-600  text-sm">{item.desc}</p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
       <div className="max-w-4xl mx-auto mt-8 bg-[#0a0a0a] text-white p-10 md:p-12 text-center border border-neutral-800 relative overflow-hidden group">
         <div className="absolute inset-0 bg-[#c5a880] opacity-0 group-hover:opacity-10 transition-opacity duration-1000"></div>
-        <h4 className=" italic text-2xl text-[#c5a880] mb-4  tracking-wide">
+        <span className="text-[#c5a880] text-xs font-semibold uppercase tracking-widest block mb-2">
+          2027 GITC 세부 겨울캠프
+        </span>
+        <h4 className="italic text-2xl text-[#c5a880] mb-4 tracking-wide font-serif">
           Weekend Special
         </h4>
-        <p className="text-neutral-300  leading-relaxed">
+        <p className="text-neutral-300 leading-relaxed">
           주말에는 정규 수업 대신 푸른 바다 아일랜드 호핑투어, 원어민 튜터와
           함께 영어를 직접 써보는 <br className="hidden md:block" />
           <span className="text-white border-b border-[#c5a880]/50 pb-1">

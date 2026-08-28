@@ -29,22 +29,14 @@ export default function NoticeSection() {
               Now Recruiting
             </div>
             <h2 className="text-4xl md:text-5xl   mb-6 leading-tight break-keep">
-              2026 여름방학 영어캠프
+              2027 겨울방학 영어캠프
               <br className="hidden md:block" /> 참가자 모집
             </h2>
             <p className="text-neutral-300 text-lg mb-10  leading-relaxed break-keep">
               23년 전통의 GITC 프리미엄! 체계적인 관리와 완벽한 몰입 환경으로
-              아이들의 영어를 바꿔줄 특별한 여름을 준비하세요.
+              아이들의 영어를 바꿔줄 특별한 겨울을 준비하세요.
             </p>
             <div className="flex flex-col gap-4">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 bg-white text-black px-6 py-4 border-l-2 border-[#c5a880] text-sm break-keep">
-                <span className="font-semibold text-[#c5a880] uppercase tracking-widest text-xs shrink-0">
-                  Early Bird
-                </span>
-                <span className="font-medium leading-relaxed">
-                  5월 31일까지 등록 시 유류할증료 최대 20만원 지원
-                </span>
-              </div>
               <a
                 href="https://blog.naver.com/readtospeak/224206815200"
                 target="_blank"
@@ -80,15 +72,12 @@ export default function NoticeSection() {
               <ul className="space-y-3 text-sm  text-neutral-300">
                 <li className="flex justify-between border-b border-neutral-800 pb-2">
                   <span className="text-white font-medium">4주 과정</span>
-                  <span>7.21 ~ 8.18</span>
                 </li>
                 <li className="flex justify-between border-b border-neutral-800 pb-2">
-                  <span className="text-white font-medium">2주 1차</span>
-                  <span>7.21 ~ 8.04</span>
+                  <span className="text-white font-medium">6주 과정</span>
                 </li>
                 <li className="flex justify-between">
-                  <span className="text-white font-medium">2주 2차</span>
-                  <span>8.04 ~ 8.18</span>
+                  <span className="text-white font-medium">8주 과정</span>
                 </li>
               </ul>
             </div>
@@ -103,21 +92,21 @@ export default function NoticeSection() {
               <div className="grid grid-cols-3 gap-4 text-center">
                 <div className="bg-neutral-900/50 py-4">
                   <div className="text-neutral-600 text-xs tracking-widest mb-2 ">
-                    2주
+                    4주
                   </div>
-                  <div className=" text-xl">259만</div>
+                  <div className=" text-xl">419만</div>
                 </div>
                 <div className="bg-neutral-900/50 py-4 border-l border-r border-[#c5a880]/20">
                   <div className="text-neutral-600 text-xs tracking-widest mb-2 ">
-                    4주
+                    6주
                   </div>
-                  <div className=" text-xl text-[#c5a880]">419만</div>
+                  <div className=" text-xl text-[#c5a880]">539만</div>
                 </div>
                 <div className="bg-neutral-900/50 py-4">
                   <div className="text-neutral-600 text-xs tracking-widest mb-2 ">
-                    6주
+                    8주
                   </div>
-                  <div className=" text-xl">539만</div>
+                  <div className=" text-xl">639만</div>
                 </div>
               </div>
             </div>
